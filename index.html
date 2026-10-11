@@ -7,270 +7,162 @@
 <style>
 :root{--gold:#ffd45c;--bg:#080b13;--line:#303e5d}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow-x:hidden;background:var(--bg);color:#f4f6ff;font-family:system-ui,sans-serif}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:#f4f6ff;font-family:system-ui,sans-serif}
 button,input{font:inherit}
 
 .app{
- max-width:600px;
- margin:auto;
- padding:10px;
- display:flex;
- flex-direction:column;
- gap:10px;
- min-height:100vh;
- padding-bottom:30px;
+ position:fixed;inset:0;
+ width:100vw;height:100vh;height:100dvh;
+ max-width:500px;margin:auto;
+ padding:4px 6px;
+ display:flex;flex-direction:column;gap:4px;
+ overflow:hidden;
 }
 
 header{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px;
+ display:flex;align-items:center;justify-content:space-between;
+ height:22px;flex-shrink:0;
 }
-.logo{font-size:20px;font-weight:1000;letter-spacing:2px;color:var(--gold);text-shadow:0 0 12px #ffb52b77}
-.sub{font-size:8px;letter-spacing:1px;color:#9ba8c2}
+.logo{font-size:14px;font-weight:1000;letter-spacing:1px;color:var(--gold);text-shadow:0 0 6px #ffb52b77}
+.sub{font-size:7px;color:#9ba8c2}
 
 .stats{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:8px;
+ display:grid;grid-template-columns:1fr 1fr;gap:4px;
+ flex-shrink:0;
 }
 .stat{
- background:#182239;
- border:1px solid var(--line);
- border-radius:10px;
- padding:8px 12px;
+ background:#182239;border:1px solid var(--line);border-radius:6px;
+ padding:3px 6px;display:flex;align-items:center;justify-content:space-between;
 }
-.label{font-size:9px;color:#9ba8c2}
-.value{font-size:18px;font-weight:950;color:var(--gold)}
+.label{font-size:8px;color:#9ba8c2}
+.value{font-size:12px;font-weight:950;color:var(--gold)}
 
 .board-wrap{
- width:100%;
- border:1px solid #39496c;
- border-radius:12px;
- overflow:hidden;
- background:#101827;
+ flex:1 1 auto;min-height:0;
+ border:1px solid #39496c;border-radius:8px;
+ overflow:hidden;background:#101827;
+ display:flex;align-items:center;justify-content:center;
 }
 #board{
- display:block;
- width:100%;
- height:auto;
- aspect-ratio:1/1.05;
+ display:block;width:100%;height:100%;
+ object-fit:contain;
 }
 
 .controls{
- display:flex;
- flex-direction:column;
- gap:10px;
+ display:flex;flex-direction:column;gap:3px;
+ flex-shrink:0;
 }
 
 .message{
- min-height:34px;
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
- padding:8px;
- border:1px solid #293550;
- border-radius:10px;
- background:#090e19;
- font-size:12px;
- font-weight:850;
+ height:22px;
+ display:flex;align-items:center;justify-content:center;text-align:center;
+ padding:2px;border:1px solid #293550;border-radius:6px;
+ background:#090e19;font-size:9px;font-weight:850;
+ flex-shrink:0;
 }
 .message.win{color:#ffe17b;border-color:#8a6822}
 .message.lose{color:#ff9aa3;border-color:#73313c}
 
 .panel{
- padding:12px;
- border:1px solid var(--line);
- border-radius:12px;
+ padding:4px 6px;
+ border:1px solid var(--line);border-radius:6px;
  background:linear-gradient(145deg,#182239,#0e1422);
- position:relative;
+ position:relative;flex-shrink:0;
 }
 .panel.locked{opacity:0.65;filter:grayscale(0.4)}
 .lock-overlay{
- position:absolute;inset:0;background:rgba(8,11,19,0.82);border-radius:12px;
- display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;
- z-index:2;font-size:11px;font-weight:900;color:#9ba8c2;text-align:center;padding:10px;
+ position:absolute;inset:0;background:rgba(8,11,19,0.88);border-radius:6px;
+ display:flex;align-items:center;justify-content:center;gap:6px;
+ z-index:2;font-size:9px;font-weight:900;color:#9ba8c2;padding:4px;
 }
 .lock-badge{
- display:inline-block;padding:2px 8px;background:#202b43;border:1px solid #3b4864;border-radius:4px;color:#ff9aa3;font-size:10px;
+ display:inline-block;padding:1px 5px;background:#202b43;border:1px solid #3b4864;border-radius:3px;color:#ff9aa3;font-size:8px;
 }
 
 .section{
- font-size:11px;
- font-weight:950;
- color:#bdc8e0;
- letter-spacing:1px;
- margin-bottom:8px;
- display:flex;justify-content:space-between;align-items:center;
+ font-size:8px;font-weight:950;color:#bdc8e0;letter-spacing:0.5px;
+ margin-bottom:2px;display:flex;justify-content:space-between;align-items:center;
 }
 
-.bet-row{
- display:grid;
- grid-template-columns:1fr 90px;
- gap:8px;
-}
+.bet-row{display:grid;grid-template-columns:1fr 65px;gap:4px}
 #bet{
- width:100%;
- padding:8px;
- background:#080d18;
- border:1px solid #3b4864;
- border-radius:8px;
- color:white;
- font-size:15px;
- font-weight:900;
+ width:100%;padding:2px 4px;background:#080d18;
+ border:1px solid #3b4864;border-radius:4px;
+ color:white;font-size:11px;font-weight:900;
 }
 .action{
- border:0;
- border-radius:8px;
- color:white;
+ border:0;border-radius:4px;color:white;
  background:linear-gradient(135deg,#a43fda,#632c9e);
- font-size:11px;
- font-weight:950;
- cursor:pointer;
+ font-size:8px;font-weight:950;cursor:pointer;
 }
-.quick{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:6px;
- margin-top:8px;
-}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:2px}
 .quick button,.reset,.upgrade-btn,.rebirth-btn{
- border:1px solid #3b4864;
- border-radius:8px;
- background:#202b43;
- color:white;
- font-size:11px;
- font-weight:850;
- padding:8px 0;
- cursor:pointer;
- text-align:center;
+ border:1px solid #3b4864;border-radius:4px;
+ background:#202b43;color:white;font-size:8px;font-weight:850;
+ padding:3px 0;cursor:pointer;text-align:center;
 }
-.upgrade-grid{
- display:grid;grid-template-columns:1fr 1fr;gap:6px;
-}
+.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
 .upgrade-btn{
  background:linear-gradient(135deg,#1f4068,#162447);
- display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;gap:2px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 2px;
 }
-.upgrade-btn small{font-size:8px;color:#9ba8c2}
+.upgrade-btn small{font-size:7px;color:#9ba8c2}
 
-.zones{
- display:grid;
- grid-template-columns:repeat(6,1fr);
- gap:4px;
-}
-.zone{
- padding:8px 2px;
- text-align:center;
- border-radius:6px;
- font-size:11px;
- font-weight:1000;
- white-space:nowrap;
-}
-.zone small{
- display:block;
- font-size:8px;
- margin-top:2px;
-}
+.zones{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+.zone{padding:3px 1px;text-align:center;border-radius:3px;font-size:8px;font-weight:1000;white-space:nowrap}
+.zone small{display:block;font-size:5.5px;margin-top:0px}
 .z0{background:#9f2538}.z1{background:#15844c}.z2{background:#1f62bc}
 .z3{background:#763bb1}.z4{background:#b17b13}.z5{background:#485066}
 
-.foot{
- display:flex;
- align-items:center;
- justify-content:space-between;
- margin-top:8px;
-}
-.reset{font-size:10px;padding:6px 12px;color:#bdc8df;background:#182239}
+.foot{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
+.reset{font-size:7px;padding:2px 6px;color:#bdc8df;background:#182239}
 
 .lever-machine{
- position:relative;
- height:80px;
- border:1px solid #39435d;
- border-radius:12px;
+ position:relative;height:42px;
+ border:1px solid #39435d;border-radius:6px;
  background:linear-gradient(110deg,#252f45,#101624 45%,#202a40);
- overflow:hidden;
- display:flex;
- align-items:center;
- justify-content:space-around;
- padding:10px;
- box-shadow:inset 0 0 12px #0009;
+ overflow:hidden;display:flex;align-items:center;justify-content:space-around;
+ padding:2px 6px;box-shadow:inset 0 0 6px #0009;flex-shrink:0;
 }
-.machine-label{
- font-size:12px;
- font-weight:1000;
- letter-spacing:1px;
- color:#c9d3e8;
- text-align:center;
-}
+.machine-label{font-size:8px;font-weight:1000;letter-spacing:0.5px;color:#c9d3e8;text-align:center}
 .lever-hit{
- position:relative;
- flex:0 0 80px;
- height:100%;
- border:0;
- background:transparent;
- padding:0;
- touch-action:manipulation;
- cursor:pointer;
+ position:relative;flex:0 0 50px;height:100%;
+ border:0;background:transparent;padding:0;
+ touch-action:manipulation;cursor:pointer;
 }
 .lever-base{
- position:absolute;
- left:10px; right:10px; bottom:6px;
- height:18px;
- border-radius:50%;
- background:linear-gradient(#65728a,#20283a 55%,#090d16);
- border:2px solid #7d8aa1;
+ position:absolute;left:4px;right:4px;bottom:2px;height:8px;
+ border-radius:50%;background:linear-gradient(#65728a,#20283a 55%,#090d16);border:1px solid #7d8aa1;
 }
 .lever-pivot{
- position:absolute;
- left:50%; bottom:14px;
- width:18px; height:18px;
- transform:translateX(-50%);
- border-radius:50%;
- background:radial-gradient(circle at 30% 25%,#f7fbff,#8d9cb3 35%,#30394d 70%);
- border:2px solid #bac5d8;
- z-index:2;
+ position:absolute;left:50%;bottom:6px;width:8px;height:8px;transform:translateX(-50%);
+ border-radius:50%;background:radial-gradient(circle at 30% 25%,#f7fbff,#8d9cb3 35%,#30394d 70%);border:1px solid #bac5d8;z-index:2;
 }
 .lever-stick{
- position:absolute;
- left:50%; bottom:22px;
- width:10px; height:50px;
- transform:translateX(-50%) rotate(-22deg);
- transform-origin:50% 100%;
- border-radius:5px;
- background:linear-gradient(90deg,#606b7f,#f2f5fa 35%,#7e899b 72%,#3b4659);
- transition:transform .22s;
+ position:absolute;left:50%;bottom:10px;width:5px;height:24px;
+ transform:translateX(-50%) rotate(-22deg);transform-origin:50% 100%;
+ border-radius:3px;background:linear-gradient(90deg,#606b7f,#f2f5fa 35%,#7e899b 72%,#3b4659);transition:transform .22s;
 }
 .lever-knob{
- position:absolute;
- left:50%; top:-12px;
- width:28px; height:28px;
- transform:translateX(-50%);
- border-radius:50%;
- background:radial-gradient(circle at 28% 22%,#fff0a5,#ffcb35 32%,#dc7610 72%,#7c3700);
- border:2px solid #ffdf72;
- box-shadow:0 0 12px #ffb82c77;
+ position:absolute;left:50%;top:-6px;width:14px;height:14px;transform:translateX(-50%);
+ border-radius:50%;background:radial-gradient(circle at 28% 22%,#fff0a5,#ffcb35 32%,#dc7610 72%,#7c3700);border:1px solid #ffdf72;box-shadow:0 0 6px #ffb82c77;
 }
-.lever-hit:active .lever-stick,.lever-machine.pulling .lever-stick{
- transform:translateX(-50%) rotate(40deg);
-}
+.lever-hit:active .lever-stick,.lever-machine.pulling .lever-stick{transform:translateX(-50%) rotate(40deg)}
 .lever-hit:disabled{opacity:.55}
 
 /* Modal */
 .modal-bg{
- position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:99;display:none;
- align-items:center;justify-content:center;padding:20px;
+ position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:99;display:none;
+ align-items:center;justify-content:center;padding:16px;
 }
 .modal{
- background:#141d30;border:1px solid #3b4864;border-radius:14px;padding:20px;width:100%;max-width:380px;text-align:center;
- display:flex;flex-direction:column;gap:12px;
+ background:#141d30;border:1px solid #3b4864;border-radius:10px;padding:14px;width:100%;max-width:320px;text-align:center;
+ display:flex;flex-direction:column;gap:8px;
 }
-.modal h3{margin:0;color:var(--gold);font-size:18px}
-.modal p{margin:0;font-size:13px;color:#cbd5e1;line-height:1.6}
-.modal-btns{display:flex;gap:8px;margin-top:6px}
-.modal-btns button{flex:1;padding:10px;border-radius:8px;border:0;font-weight:900;cursor:pointer}
+.modal h3{margin:0;color:var(--gold);font-size:14px}
+.modal p{margin:0;font-size:10px;color:#cbd5e1;line-height:1.5}
+.modal-btns{display:flex;gap:6px;margin-top:4px}
+.modal-btns button{flex:1;padding:6px;border-radius:6px;border:0;font-size:10px;font-weight:900;cursor:pointer}
 .btn-cancel{background:#2a3650;color:white}
 .btn-confirm{background:linear-gradient(135deg,#e0a51b,#b17b13);color:white}
 </style>
@@ -294,14 +186,13 @@ header{
   <div class="sub">REBIRTH SYSTEM • Lv.<span id="userLevel">1</span></div>
  </div>
  <div style="text-align:right">
-  <div style="font-size:9px;color:#9ba8c2">転生回数: <span id="rebirthCount" style="color:var(--gold);font-weight:900">0回</span></div>
-  <div style="font-size:9px;color:#9ba8c2">倍率ボーナス: +<span id="bonusRate">0</span>%</div>
+  <div style="font-size:8px;color:#9ba8c2">転生: <span id="rebirthCount" style="color:var(--gold);font-weight:900">0回</span> (+<span id="bonusRate">0</span>%)</div>
  </div>
 </header>
 
 <div class="stats">
- <div class="stat"><div class="label">所持金</div><div class="value" id="balance">10,000</div></div>
- <div class="stat"><div class="label">ベット</div><div class="value" id="currentBet">100</div></div>
+ <div class="stat"><span class="label">所持金</span><span class="value" id="balance">10,000</span></div>
+ <div class="stat"><span class="label">ベット</span><span class="value" id="currentBet">100</span></div>
 </div>
 
 <div class="board-wrap">
@@ -321,41 +212,39 @@ header{
 
  <div id="message" class="message">ベットを決めてレバーを引こう！</div>
 
-<!-- 強化 & 連続ドロップ パネル (Lv.7未達成時はロック) -->
+<!-- 強化 & 連続ドロップ パネル -->
  <div class="panel" id="featurePanel">
   <div class="lock-overlay" id="lockOverlay">
-   <div>🔒 Lv.7で解放されます</div>
-   <div class="lock-badge" id="lockProgress">現在のLv.1 / Lv.7</div>
+   <div>🔒 Lv.7で解放</div>
+   <div class="lock-badge" id="lockProgress">Lv.1 / 7</div>
   </div>
   <div class="section">
    <span>UPGRADE & SKILL</span>
-   <span style="font-size:9px;color:var(--gold)" id="skillStatus">連続ドロップ: OFF</span>
+   <span style="font-size:7.5px;color:var(--gold)" id="skillStatus">連ドロップ: OFF</span>
   </div>
   <div class="upgrade-grid">
    <button class="upgrade-btn" id="upPayout">
      <span>倍率強化 (Lv.<span id="lvlPayout">0</span>)</span>
-     <small id="costPayout">コスト: 5,000</small>
+     <small id="costPayout">5,000</small>
    </button>
    <button class="upgrade-btn" id="upDrop">
-     <span>連ドロップLv.<span id="lvlDrop">0</span></span>
-     <small id="costDrop">コスト: 10,000</small>
+     <span>連ドロップ (Lv.<span id="lvlDrop">0</span>)</span>
+     <small id="costDrop">10,000</small>
    </button>
   </div>
  </div>
 
 <!-- 転生パネル -->
  <div class="panel">
-  <div class="section">REBIRTH / 転生</div>
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-   <div style="font-size:9px;color:#9ba8c2;line-height:1.4">
-    必要条件: 所持金 <span id="rebirthReq" style="color:var(--gold);font-weight:900">1,000,000</span> コイン
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:4px">
+   <div style="font-size:8px;color:#9ba8c2">
+    転生条件: <span id="rebirthReq" style="color:var(--gold);font-weight:900">1,000,000</span>
    </div>
-   <button class="rebirth-btn" id="rebirthBtn" style="padding:8px 14px;background:linear-gradient(135deg,#b17b13,#8a6822);font-weight:950">転生する</button>
+   <button class="rebirth-btn" id="rebirthBtn" style="padding:3px 10px;background:linear-gradient(135deg,#b17b13,#8a6822);font-weight:950;font-size:8px">転生する</button>
   </div>
  </div>
 
  <div class="panel">
-  <div class="section">BET AMOUNT</div>
   <div class="bet-row">
    <input id="bet" type="number" inputmode="numeric" min="100" max="10000000" step="100" value="100">
    <button id="allBet" class="action">ALL BET</button>
@@ -369,7 +258,6 @@ header{
  </div>
 
  <div class="panel">
-  <div class="section">LANDING ZONES</div>
   <div class="zones">
    <div class="zone z4">×50<small>JP</small></div>
    <div class="zone z5">−100%<small>LOSE</small></div>
@@ -379,7 +267,7 @@ header{
    <div class="zone z3">×10<small>JP</small></div>
   </div>
   <div class="foot">
-   <span style="font-size:10px;color:#9ba8c2">オートセーブ対応</span>
+   <span style="font-size:7px;color:#9ba8c2">オートセーブ</span>
    <button id="reset" class="reset">データ初期化</button>
   </div>
  </div>
@@ -392,7 +280,7 @@ header{
 const $=id=>document.getElementById(id);
 const canvas=$('board'),ctx=canvas.getContext('2d');
 const betInput=$('bet'),lever=$('lever'),machine=$('leverMachine'),message=$('message');
-const W=520,H=540,KEY='coinDropRebirth_v1',START=10000;
+const W=520,H=540,KEY='coinDropRebirth_v2',START=10000;
 
 const zones=[
  {label:'×50',color:'#e0a51b',payout:50,type:'win'},
@@ -413,7 +301,7 @@ let state={
  upDropLevel:0
 };
 
-let coinsActive=[]; // 複数コイン落下用
+let coinsActive=[];
 let pegs=[];
 
 function load(){
@@ -458,18 +346,17 @@ function updateUI(){
  $('rebirthReq').textContent=getRebirthReq().toLocaleString('en-US');
 
  $('lvlPayout').textContent=state.upPayoutLevel;
- $('costPayout').textContent=`コスト: ${Math.floor(getPayoutCost()).toLocaleString()}`;
- $('lvlDrop').textContent=state.upDropLevel;
- $('costDrop').textContent=`コスト: ${Math.floor(getDropCost()).toLocaleString()}`;
+ $('costPayout').textContent=Math.floor(getPayoutCost()).toLocaleString();$('lvlDrop').textContent=state.upDropLevel;
+ $('costDrop').textContent=Math.floor(getDropCost()).toLocaleString();
 
  const dropCount=Math.min(3, 1 + state.upDropLevel);
- $('skillStatus').textContent = state.upDropLevel>0 ? `同時落下: ${dropCount}枚` : '連続ドロップ: OFF';
+ $('skillStatus').textContent = state.upDropLevel>0 ? `連ドロップ: ${dropCount}枚` : '連ドロップ: OFF';
 
  if(state.userLevel>=7){
   $('featurePanel').classList.remove('locked');$('lockOverlay').style.display='none';
  } else {
   $('featurePanel').classList.add('locked');
-  $('lockOverlay').style.display='flex';$('lockProgress').textContent=`現在のLv.${state.userLevel} / Lv.7`;
+  $('lockOverlay').style.display='flex';$('lockProgress').textContent=`Lv.${state.userLevel} / 7`;
  }
 }
 
@@ -519,7 +406,7 @@ function draw(){
   ctx.fillStyle='#fff';ctx.font='bold 18px system-ui';ctx.textAlign='center';
   ctx.fillText(zones[i].label,i*bw+bw/2,top+38);
  }
- ctx.strokeStyle='#8390ad';ctx.beginPath();ctx.moveTo(W-1,top);ctx.lineTo(W-1,H);ctx.stroke();
+ ctx.strokeStyle='#8390ad';ctx.beginPath();ctx.moveTo(W-1,top);ctx.lineTo(W-1,H);stroke();
 
  for(const coin of coinsActive){
   ctx.save();ctx.translate(coin.x,coin.y);ctx.rotate(coin.spin);
@@ -551,7 +438,7 @@ function drop(){
  if(state.balance < totalNeeded){
   say('コインが足りない！','lose');
   return;
-}
+ }
 
  state.balance -= totalNeeded;
  save(); updateUI(); say('コイン落下中…');
@@ -621,7 +508,6 @@ function drop(){
 
    if(allDone){
     save(); updateUI();
-    // 結果メッセージ
     let totalWin = coinsActive.reduce((sum, c)=>{
      const lZone = Math.max(0,Math.min(5,Math.floor(c.x/(W/6))));
      const z = zones[lZone];
@@ -632,7 +518,7 @@ function drop(){
     if(totalWin >= totalSpent) {
      say(`獲得合計: +${totalWin.toLocaleString()} コイン！`,'win');
     } else {
-     say(`惜しい！ −${(totalSpent - totalWin).toLocaleString()} コイン損失`,'lose');
+     say(`惜しい！ −${(totalSpent - totalWin).toLocaleString()} 損失`,'lose');
     }
     coinsActive=[];
     draw();
@@ -646,7 +532,7 @@ function drop(){
 
 lever.addEventListener('click',drop);
 
-$('upPayoutLevel').onclick=()=>{
+$('upPayout').onclick=()=>{
  if(state.userLevel<7)return;
  let cost=getPayoutCost();
  if(state.balance<cost){say('コインが足りません！','lose');return;}
@@ -656,15 +542,15 @@ $('upPayoutLevel').onclick=()=>{
 $('upDrop').onclick=()=>{
  if(state.userLevel<7)return;
  let cost=getDropCost();
- if(state.balance<cost){say('コインが足りません！','lose');return}
+ if(state.balance<cost){say('コインが足りません！','lose');return;}
  state.balance-=cost; state.upDropLevel++;
- save(); updateUI(); say('同時ドロップ強化を購入しました！','win');
+ save(); updateUI(); say('連ドロップ強化を購入しました！','win');
 };
 
 $('rebirthBtn').onclick=()=>{
  let req=getRebirthReq();
  if(state.balance < req){
-  say(`転生には所持金 ${req.toLocaleString()} コインが必要です！`,'lose');
+  say(`転生条件: ${req.toLocaleString()} コインが必要です！`,'lose');
   return;
  }
  $('modalBg').style.display='flex';
